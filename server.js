@@ -20,5 +20,9 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/auth', require('./routes/auth.js'));
 app.use('/api/trips', require('./routes/trips.js'));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server executing on port ${PORT}`));
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server executing on port ${PORT}`));
+}
+
+module.exports = app;
